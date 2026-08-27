@@ -1,11 +1,12 @@
 #include "Characters/SoulCharacterBase.h"
 #include "AbilitySystemComponent.h"
 
-ASoulCharacterBase::ASoulCharacterBase()
+ASoulCharacterBase::ASoulCharacterBase(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 	PrimaryActorTick.bCanEverTick = false;
-
-	// Initialize the Ability System Component
+	
+	// Initialize Ability System Component
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 }
 

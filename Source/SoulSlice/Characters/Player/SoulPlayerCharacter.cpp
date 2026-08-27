@@ -3,11 +3,14 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Camera/CameraComponent.h"
+#include "Components/Movement/SoulMovementComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
 
-ASoulPlayerCharacter::ASoulPlayerCharacter()
+ASoulPlayerCharacter::ASoulPlayerCharacter(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer.SetDefaultSubobjectClass<USoulMovementComponent>
+		(ACharacter::CharacterMovementComponentName))
 {
 	PrimaryActorTick.bCanEverTick = false;
 	
@@ -74,18 +77,13 @@ void ASoulPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 void ASoulPlayerCharacter::Move(const FInputActionValue& Value)
 {
-	if (Controller)
-	{
-		const FVector2D MovementVector = Value.Get<FVector2D>();
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-		
-		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-		
-		AddMovementInput(ForwardDirection, MovementVector.Y);
-		AddMovementInput(RightDirection, MovementVector.X);
-	}
+	// My own movement component that handles movement logic
+	USoulMovementComponent* SoulMovementComp = Cast<USoulMovementComponent>(GetCharacterMovement());
+	
+	if (!SoulMovementComp)return;
+	
+	const FVector2D MovementVector = Value.Get<FVector2D>();
+	SoulMovementComp->Move(MovementVector);
 }
 
 void ASoulPlayerCharacter::Look(const FInputActionValue& Value)

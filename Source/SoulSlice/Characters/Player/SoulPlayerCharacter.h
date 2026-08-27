@@ -14,7 +14,7 @@ class SOULSLICE_API ASoulPlayerCharacter : public ASoulCharacterBase
 	GENERATED_BODY()
 
 public:
-	ASoulPlayerCharacter();
+	ASoulPlayerCharacter(const FObjectInitializer& ObjectInitializer);
 
 protected:
 	virtual void BeginPlay() override;
@@ -27,6 +27,7 @@ public:
 protected:
 	
 	// Components
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Camera")
 	TObjectPtr<class UCameraComponent> CameraComponent;
 	

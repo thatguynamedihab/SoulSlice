@@ -13,7 +13,7 @@ class SOULSLICE_API ASoulCharacterBase : public ACharacter, public IAbilitySyste
 	GENERATED_BODY()
 
 public:
-	ASoulCharacterBase();
+	ASoulCharacterBase(const FObjectInitializer& ObjectInitializer);
 
 protected:
 	virtual void BeginPlay() override;
