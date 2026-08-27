@@ -24,3 +24,5 @@ Plugins/**/Intermediate/
 # Misc
 *.code-workspace
 .vsconfig
+Architecture.md
+ProjectArchitecture.md
