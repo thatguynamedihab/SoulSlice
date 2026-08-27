@@ -25,10 +25,3 @@ void ASoulCharacterBase::PossessedBy(AController* NewController)
 	Super::PossessedBy(NewController);
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 }
-
-void ASoulCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-}
-

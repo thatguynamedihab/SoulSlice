@@ -20,7 +20,6 @@ protected:
 	
 
 public:	
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void PossessedBy(AController* NewController) override;
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
