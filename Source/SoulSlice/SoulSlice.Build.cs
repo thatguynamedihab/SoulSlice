@@ -10,7 +10,7 @@ public class SoulSlice : ModuleRules
 
 		PublicIncludePaths.Add(ModuleDirectory);
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","EnhancedInput", "GameplayAbilities", "GameplayTags", "GameplayTasks" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore","EnhancedInput", "GameplayAbilities", "GameplayTags", "GameplayTasks",  "Niagara" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 

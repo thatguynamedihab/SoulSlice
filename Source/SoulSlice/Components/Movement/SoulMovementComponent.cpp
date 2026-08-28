@@ -1,4 +1,6 @@
 #include "SoulMovementComponent.h"
+
+#include "Engine/DamageEvents.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/Controller.h"
 #include "Math/RotationMatrix.h"

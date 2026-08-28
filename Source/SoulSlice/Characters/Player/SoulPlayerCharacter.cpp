@@ -6,6 +6,7 @@
 #include "Components/Movement/SoulMovementComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Components/Combat/SoulCombatComponent.h"
 
 
 ASoulPlayerCharacter::ASoulPlayerCharacter(const FObjectInitializer& ObjectInitializer)
@@ -35,6 +36,9 @@ ASoulPlayerCharacter::ASoulPlayerCharacter(const FObjectInitializer& ObjectIniti
 	
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->bUseControllerDesiredRotation = false;
+	
+	// Initialize Combat Component
+	CombatComponent = CreateDefaultSubobject<USoulCombatComponent>(TEXT("CombatComponent"));
 }
 
 void ASoulPlayerCharacter::BeginPlay()
@@ -68,10 +72,12 @@ void ASoulPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 	UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent);
 	if (EnhancedInputComponent)
 	{
-		if (!MoveAction || !LookAction) return;
+		if (!MoveAction || !LookAction || !EquipWeaponAction || !UnequipWeaponAction) return;
 		
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASoulPlayerCharacter::Move);
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASoulPlayerCharacter::Look);
+		EnhancedInputComponent->BindAction(EquipWeaponAction, ETriggerEvent::Started, this, &ASoulPlayerCharacter::EquipWeapon);
+		EnhancedInputComponent->BindAction(UnequipWeaponAction, ETriggerEvent::Started, this, &ASoulPlayerCharacter::UnequipWeapon);
 	}
 }
 
@@ -92,4 +98,14 @@ void ASoulPlayerCharacter::Look(const FInputActionValue& Value)
 	
 	AddControllerYawInput(LookDirection.X * LookSensitivity);
 	AddControllerPitchInput(LookDirection.Y * LookSensitivity);
+}
+
+void ASoulPlayerCharacter::EquipWeapon()
+{
+	CombatComponent->EquipNearbyWeapon();
+}
+
+void ASoulPlayerCharacter::UnequipWeapon()
+{
+	CombatComponent->UnequipWeapon();
 }
