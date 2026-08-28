@@ -11,8 +11,10 @@ AItemBase::AItemBase()
 	
 	// Initialize Components and configure their properties
 	
+	ItemRoot = CreateDefaultSubobject<USceneComponent>(TEXT("ItemRoot"));
+	SetRootComponent(ItemRoot);
 	ItemMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ItemMesh"));
-	SetRootComponent(ItemMesh);
+	ItemMesh->SetupAttachment(ItemRoot);
 	ItemMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 	ItemMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 

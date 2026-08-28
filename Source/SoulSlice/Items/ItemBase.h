@@ -22,19 +22,22 @@ protected:
 	
 	// Components
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Item")
+	TObjectPtr<USceneComponent> ItemRoot;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	TObjectPtr<UStaticMeshComponent> ItemMesh;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	TObjectPtr<USphereComponent> ItemSphereCollision;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item | Sound")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item | Sound")
 	TObjectPtr<USoundBase> PickupSound;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item | VFX")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item | VFX")
 	TObjectPtr<UNiagaraComponent> ItemVFX;
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	float PickupRadius = 50.0f;
 	
 	UFUNCTION()
